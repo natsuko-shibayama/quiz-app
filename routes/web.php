@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,5 +23,8 @@ Route::middleware('auth')->group(function () {
 
 // categoryのルーティング
 Route::resource('categories',CategoryController::class);
+
+// quizのルーティング
+Route::resource('quizzes', QuizController::class);
 
 require __DIR__.'/auth.php';

@@ -29,7 +29,6 @@
       text-align: center;
       text-decoration: none;
       border-radius: 4px;
-      margin-bottom: 5px;
 
     }
     .return_btn:hover{
@@ -116,25 +115,7 @@
   </style>
 </head>
 <body>
-  <div class="category_detail">
-    <h1 class="category_detail_title">カテゴリ詳細</h1>
-    <div>
-      <p class="category_name" data-id="{{ $category['id'] }}">{{ $category['name'] }}</p>
-      <div class="is_edit">
-        <form action="{{ route("categories.update" ,$category['id']) }}" method="POST">
-          {{-- putはhtmlではサポートされてないから下記のように@methodで書く必要がある --}}
-          @method('PUT')
-          @csrf
-          <input type="text" class="edit_input" name="name" value="{{ $category['name'] }}" disabled>
-          <textarea class="edit_textarea" name="description" placeholder="説明をかいてください" disabled>{{ $category['description'] }}</textarea>
-          <button class="update_btn" type="submit">更新</button>
-        </form>
-      </div>
-      <a class="edit_btn">編集</a>
-      <a class="return_btn" href="{{ route('categories.index') }}">戻る</a>
-      <a class="quiz_btn" href="{{ route('quizzes.index') }}">クイズ新規登録</a>
-    </div>
-  </div>
+  <div>クイズ一覧が表示されるよ！</div>
   </div>
 </body>
 </html>
