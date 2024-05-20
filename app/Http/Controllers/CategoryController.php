@@ -41,6 +41,7 @@ class CategoryController extends Controller
         $category = new Category;
         //categoryインスタンスのnameプロパティに$request->nameを代入
         $category->name = $request->name;
+        $category->description = $request->description;
         //saveメソッドでcategoryを保存
         $category->save();
         //category一覧へ遷移
@@ -62,7 +63,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($request->category);
         $errors = session('errors') ? session('errors')->toArray() : [];
-        return view('categories.show', compact('categories', 'errors'));
+        return view('categories.show', compact('category', 'errors'));
     }
     /**
      * category更新処理
@@ -75,9 +76,13 @@ class CategoryController extends Controller
         }
         $category = Category::findOrFail($request->category);
         $category->name = $request->name;
+        $category->description = $request->description;
         $category->save();
         $errors = session('errors') ? session('errors')->toArray() : [];
-        return view('categories.', compact('categories', 'errors'));
+        return view('categories.show', compact('category', 'errors'));
+
+        // 困ったらこれで確認
+        // $validator->errors()->all()
     }
 
     /**
@@ -88,6 +93,7 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'unique:categories', 'max:20'],
+            'description' => ['required', 'string', 'max:2000']
         ]);
 
         return $validator;

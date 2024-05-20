@@ -67,6 +67,10 @@
                 <th scope="row">カテゴリー名</th>
                 <td><input type="text" id="name" name="name"></td>
             </tr>
+            <tr>
+                <th scope="row">説明</th>
+                <td><textarea type="textarea" id="description" name="description"></textarea></td>
+            </tr>
       </table>
     </div>
     <div class="btn_wrapper">
@@ -79,7 +83,3 @@
   </form>
 </body>
 </html>
-
-{{-- <script>
-  flatpickr('.flatpickr');
-</script> --}}
