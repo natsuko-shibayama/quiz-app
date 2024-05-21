@@ -15,95 +15,6 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <title>カテゴリ編集</title>
   <style>
-    .category_name{
-      font-size: 24px;
-      font-weight: bold;
-      color: coral;
-    }
-    .return_btn{
-      display: block;
-      width: 100px;
-      padding: 10px;
-      background-color: cadetblue;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 4px;
-
-    }
-    .return_btn:hover{
-      color: black;
-      background-color: #fff;
-      border: 1px solid black;
-    }
-    .quiz_btn{
-      display: block;
-      width: 180px;
-      padding: 10px;
-      background-color:gold;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 4px;
-
-    }
-    .quiz_btn:hover{
-      color: black;
-      background-color: #fff;
-      border: 1px solid black;
-    }
-    .is_edit{
-      pointer-events: none;
-    }
-    .edit_btn{
-      cursor: pointer;
-      visibility: visible;
-      display: block;
-      width: 100px;
-      padding: 10px;
-      background-color:coral;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 4px;
-      border-color: coral;
-      margin-bottom: 5px;
-    }
-    .edit_input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      opacity: 0.5;
-    }
-    .edit_textarea {
-      width: 100%;
-      height: 150px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      opacity: 0.5;
-    }
-    .update_btn{
-      width: 100px;
-      padding: 10px;
-      background-color:coral;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 4px;
-      border-color: coral;
-      margin-bottom: 5px;
-      display: none;
-      pointer-events: auto;
-    }
-    .update_btn:hover{
-      color: black;
-      background-color: #fff;
-      border: 1px solid black;
-    }
     .category_detail_title{
       font-size: 24px;
       font-weight: bold;
@@ -115,7 +26,42 @@
   </style>
 </head>
 <body>
-  <div>クイズ一覧が表示されるよ！</div>
+  <div>
+    <h1 class="category_detail_title">クイズ一覧</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>カテゴリー名</th>
+          <th>クイズ問題</th>
+          <th>クイズ答え</th>
+          <th>作成日時</th>
+          <th>更新日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if($quizzes !== null){
+          @foreach ($quizzes as $quiz)
+              <tr>
+                <td>{{ $quiz['id'] }}</td>
+                <td>{{ $quiz['category_id'] }}</td>
+                <td>{{ $quiz['question'] }}</td>
+                <td>{{ $quiz['answer'] }}</td>
+                <td>{{ $quiz['created_at'] }}</td>
+                <td>{{ $quiz['updated_at'] }}</td>
+              </tr>
+          @endforeach
+        }else{
+          
+        }
+        @endif
+      </tbody>
+    </table>
+    <div>
+      <a class="return_btn" type="submit" href="{{ route('') }}">戻る</a>
+    </div>
+
+  </div>
   </div>
 </body>
 </html>

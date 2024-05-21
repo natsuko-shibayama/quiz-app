@@ -15,8 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::get()->toArray();
-        $errors = session('errors') ? session('errors')->toArray() : [];
-        return view('categories.index', compact('categories', 'errors'));
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -45,7 +44,7 @@ class CategoryController extends Controller
         //saveメソッドでcategoryを保存
         $category->save();
         //category一覧へ遷移
-        return view(route('categories.index'));
+        return redirect()->route('categories.index');
     }
 
     /**

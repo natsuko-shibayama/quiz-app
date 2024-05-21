@@ -39,9 +39,9 @@
     }
     .quiz_btn{
       display: block;
-      width: 180px;
+      width: 160px;
       padding: 10px;
-      background-color:gold;
+      background-color:blue;
       color: white;
       text-align: center;
       text-decoration: none;
@@ -132,7 +132,9 @@
       </div>
       <a class="edit_btn">編集</a>
       <a class="return_btn" href="{{ route('categories.index') }}">戻る</a>
-      <a class="quiz_btn" href="{{ route('quizzes.index') }}">クイズ新規登録</a>
+      <a class="quiz_btn" href="{{ route('quizzes.create').'?category_id='.$category['id'] }}">クイズ新規登録</a>
+      {{-- route()はURLを生成するだけ。→http://localhost/quizzes/create、文字列を生成している。パラメーターをつけたいときは、?キー＝バリュー --}}
+      {{-- <div>{{ route('quizzes.create') }}</div>マスタッシュ構文です。{{  }}の中にPHPの＄なんとかって書く。 --}}
     </div>
   </div>
   </div>
