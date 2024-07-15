@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -53,7 +54,9 @@ class CategoryController extends Controller
     public function show(Request $request)
     {
         $category = Category::findOrFail($request->category);
-        return view('categories.show', compact('category'));
+        $quizzes = Category::find($request->category)->quizzes;
+        // findの引数はPK
+        return view('categories.show', compact('category', 'quizzes'));
     }
     /**
      * category編集画面

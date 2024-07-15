@@ -115,7 +115,7 @@
     }
   </style>
 </head>
-<body>
+　<body>
   <div class="category_detail">
     <h1 class="category_detail_title">カテゴリ詳細</h1>
     <div>
@@ -137,6 +137,38 @@
       {{-- <div>{{ route('quizzes.create') }}</div>マスタッシュ構文です。{{  }}の中にPHPの＄なんとかって書く。 --}}
     </div>
   </div>
+
+  {{-- ここからクイズ一覧 --}}
+  <div class="quiz_index">
+    <h1 class="quiz_index_title">クイズ一覧</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>クイズ問題</th>
+          <th>クイズ答え</th>
+          <th>作成日時</th>
+          <th>更新日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($quizzes as $quiz)
+        <tr>
+          <td>{{ $quiz['id'] }}</td>
+          <td>{{ $quiz['question'] }}</td>
+          <td>{{ $quiz['answer'] }}</td>
+          <td>{{ $quiz['created_at'] }}</td>
+          <td>{{ $quiz['updated_at'] }}</td>
+          <td><a class="edit_btn" href="{{ route('quizzes.show', $quiz['id']) }}">詳細</a></td>
+          <td><button class="return_btn">削除</button></td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    {{-- <div>
+      <a class="return_btn" type="submit" href="{{ route('categories.index') }}">戻る</a>
+    </div> --}}
   </div>
 </body>
 </html>

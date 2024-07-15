@@ -24,7 +24,8 @@ class StoreQuizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'question' => ['required', 'string',  'max:200'],
+            'answer' => ['required', 'string', 'max:20']
         ];
     }
 }
