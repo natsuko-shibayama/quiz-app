@@ -28,3 +28,10 @@ Route::resource('categories',CategoryController::class);
 Route::resource('quizzes', QuizController::class);
 
 require __DIR__.'/auth.php';
+
+Route::middleware('auth')->group(function () {
+    //管理画面topページはログインしていないと表示できませんよ
+    Route::get('/admin/top', function(){
+        return view('admin.top');
+    })->name('admin.top');
+});
