@@ -22,16 +22,30 @@ Route::middleware('auth')->group(function () {
 
 
 // categoryのルーティング
-Route::resource('categories',CategoryController::class);
+// Route::resource('categories',CategoryController::class);
 
 // quizのルーティング
-Route::resource('quizzes', QuizController::class);
+// Route::resource('quizzes', QuizController::class);
 
 require __DIR__.'/auth.php';
 
-Route::middleware('auth')->group(function () {
-    //管理画面topページはログインしていないと表示できませんよ
-    Route::get('/admin/top', function(){
-        return view('admin.top');
-    })->name('admin.top');
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    //管理画面topページ 兼　カテゴリー一覧表示
+    Route::get('top', [CategoryController::class, 'top'])->name('top');
+
+    // カテゴリー管理
+    Route::prefix('categories')->name('categories.')->group(function(){
+        //カテゴリー新規登録画面
+        Route::get('create', [CategoryController::class, 'create'])->name('create');
+        // カテゴリー新規登録処理
+        Route::post('store', [CategoryController::class, 'store'])->name('store');
+        // カテゴリー詳細画面
+        Route::get('{categoryId}', [CategoryController::class,'show'])->name('show');
+        // カテゴリー編集画面表示
+        Route::get('{categoryId}/edit', [CategoryController::class,'edit'])->name('edit');
+        // カテゴリー更新処理
+        Route::post('{categoryId}/update', [CategoryController::class,'update'])->name('update');
+        // カテゴリー削除機能
+        Route::post('{categoryId}/destroy', [CategoryController::class,'destroy'])->name('destroy');
+    });
 });
