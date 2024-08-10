@@ -17,7 +17,7 @@ return new class extends Migration
             ->references('id')
             ->on('categories')
             ->onUpdate('cascade')
-            ->onDelete('restrict');
+            ->onDelete('restrict');//cascadeにすると親ごと削除できるけど、子を消さないと親消せなくてもいいなら、restrictでOK
 
         });
     }
