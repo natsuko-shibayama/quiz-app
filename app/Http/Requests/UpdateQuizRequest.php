@@ -4,9 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
-
-class StoreQuizRequest extends FormRequest
+class UpdateQuizRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,7 +32,10 @@ class StoreQuizRequest extends FormRequest
             'isCorrect2' => ['required', 'integer','in:0,1'],
             'isCorrect3' => ['required', 'integer','in:0,1'],
             'isCorrect4' => ['required', 'integer','in:0,1'],
-
+            'optionId1' => ['required', 'integer', 'exists:options,id'],
+            'optionId2' => ['required', 'integer', 'exists:options,id'],
+            'optionId3' => ['required', 'integer', 'exists:options,id'],
+            'optionId4' => ['required', 'integer', 'exists:options,id'],
         ];
     }
 }

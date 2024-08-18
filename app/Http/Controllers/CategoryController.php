@@ -60,14 +60,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * category詳細画面表示
+     * category詳細画面表示　兼　クイズ一覧表示
      */
     public function show(Request $request , int $categoryId)
     {
         // dd($categoryId, $request);
-        $category = Category::findOrFail($categoryId);
+        $category = Category::with('quizzes')->findOrFail($categoryId);
+        // dd('$category->quizzes', $category->quizzes);
         return view('admin.categories.show' , [
-            'category' => $category
+            'category' => $category,
+            'quizzes'=> $category->quizzes
         ]);
     //     // $quizzes = Category::find($request->category)->quizzes;
     //     // // findの引数はPK
