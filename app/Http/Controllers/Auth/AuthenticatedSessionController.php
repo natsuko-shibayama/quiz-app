@@ -14,6 +14,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
+    // createはログイン画面を開くアクション
     public function create(): View
     {
         return view('auth.login');
@@ -28,7 +29,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // 管理画面トップページにリダイレクト
+        return redirect()->intended(route('admin.top', absolute: false));
     }
 
     /**
@@ -42,6 +44,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        // ログイン画面にリダイレクト
+        return redirect()->intended(route('login', absolute: false));
     }
 }

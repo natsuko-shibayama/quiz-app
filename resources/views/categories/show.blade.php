@@ -29,9 +29,26 @@
       text-align: center;
       text-decoration: none;
       border-radius: 4px;
+      margin-bottom: 5px;
 
     }
     .return_btn:hover{
+      color: black;
+      background-color: #fff;
+      border: 1px solid black;
+    }
+    .quiz_btn{
+      display: block;
+      width: 160px;
+      padding: 10px;
+      background-color:blue;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 4px;
+
+    }
+    .quiz_btn:hover{
       color: black;
       background-color: #fff;
       border: 1px solid black;
@@ -88,24 +105,70 @@
       background-color: #fff;
       border: 1px solid black;
     }
+    .category_detail_title{
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .quiz_index_title{
+      font-size: 24px;
+      font-weight: bold;
+    }
   </style>
 </head>
-<body>
-  <h1>カテゴリ詳細ページ</h1>
-  <div>
-    <p class="category_name" data-id="{{ $category['id'] }}">{{ $category['name'] }}</p>
-    <div class="is_edit">
-      <form action="{{ route("categories.update" ,$category['id']) }}" method="POST">
-        {{-- putはhtmlではサポートされてないから下記のように@methodで書く必要がある --}}
-        @method('PUT')
-        @csrf
-        <input type="text" class="edit_input" name="name" value="{{ $category['name'] }}" disabled>
-        <textarea class="edit_textarea" name="description" placeholder="説明をかいてください" disabled>{{ $category['description'] }}</textarea>
-        <button class="update_btn" type="submit">更新</button>
-      </form>
+　<body>
+  <div class="category_detail">
+    <h1 class="category_detail_title">カテゴリ詳細</h1>
+    <div>
+      <p class="category_name" data-id="{{ $category['id'] }}">{{ $category['name'] }}</p>
+      <div class="is_edit">
+        <form action="{{ route("categories.update" ,$category['id']) }}" method="POST">
+          {{-- putはhtmlではサポートされてないから下記のように@methodで書く必要がある --}}
+          @method('PUT')
+          @csrf
+          <input type="text" class="edit_input" name="name" value="{{ $category['name'] }}" disabled>
+          <textarea class="edit_textarea" name="description" placeholder="説明をかいてください" disabled>{{ $category['description'] }}</textarea>
+          <button class="update_btn" type="submit">更新</button>
+        </form>
+      </div>
+      <a class="edit_btn">編集</a>
+      <a class="return_btn" href="{{ route('categories.index') }}">戻る</a>
+      <a class="quiz_btn" href="{{ route('quizzes.create').'?category_id='.$category['id'] }}">クイズ新規登録</a>
+      {{-- route()はURLを生成するだけ。→http://localhost/quizzes/create、文字列を生成している。パラメーターをつけたいときは、?キー＝バリュー --}}
+      {{-- <div>{{ route('quizzes.create') }}</div>マスタッシュ構文です。{{  }}の中にPHPの＄なんとかって書く。 --}}
     </div>
-    <a class="edit_btn">編集</a>
-    <a class="return_btn" href="{{ route('categories.index') }}">戻る</a>
+  </div>
+
+  {{-- ここからクイズ一覧 --}}
+  <div class="quiz_index">
+    <h1 class="quiz_index_title">クイズ一覧</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>クイズ問題</th>
+          <th>クイズ答え</th>
+          <th>作成日時</th>
+          <th>更新日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($quizzes as $quiz)
+        <tr>
+          <td>{{ $quiz['id'] }}</td>
+          <td>{{ $quiz['question'] }}</td>
+          <td>{{ $quiz['answer'] }}</td>
+          <td>{{ $quiz['created_at'] }}</td>
+          <td>{{ $quiz['updated_at'] }}</td>
+          <td><a class="edit_btn" href="{{ route('quizzes.show', $quiz['id']) }}">詳細</a></td>
+          <td><button class="return_btn">削除</button></td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    {{-- <div>
+      <a class="return_btn" type="submit" href="{{ route('categories.index') }}">戻る</a>
+    </div> --}}
   </div>
 </body>
 </html>
