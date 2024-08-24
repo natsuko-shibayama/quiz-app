@@ -1,6 +1,6 @@
 # プロジェクトを見る時
 - [こちらをクローンして開始します](https://github.com/natsuko-shibayama/quiz-app.git)
-**クローンしたらsail npm run devをした上で進めてください**
+<br>**クローンしたらsail npm run devをした上で進めてください**
 
 ## 操作フロー
 - [管理者画面の操作フローはこちら](flow.drawio)
