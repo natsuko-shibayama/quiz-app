@@ -8,9 +8,19 @@ use Illuminate\Support\Facades\Route;
 
 // プレイヤー画面
 Route::get('/', [PlayController::class, 'top'])->name('top');
-// クイズのスタート画面
-Route::get('categories/{categoryId}', [PlayController::class, 'categories'])->name('categories');
+Route::prefix('categories/{categoryId}')->name('categories.')->group((function(){
+    Route::get('/', [PlayController::class, 'categories'])->name('start');
 
+    // クイズ出題画面
+    Route::get('quizzes', [PlayController::class, 'quizzes'])->name('quizzes');
+
+    // クイズ解答画面
+    Route::post('quizzes/answer' , [PlayController::class, 'answer'])->name('quizzes.answer');
+
+    // リザルト画面
+    Route::get('quizzes/result', [PlayController::class,'result'])->name('quizzes.result');
+}));
+// クイズのスタート画面
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
